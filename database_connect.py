@@ -78,8 +78,32 @@ my_cursor.executemany(sql_stuff, record)
 #mydb.commit()
 
 # Show the table data
+#my_cursor.execute("SELECT * FROM users")
+#for user in my_cursor:
+#    print(user)
+
+
+
+##################################################################
+###### Select and display results better (but still shitty) ######
+##################################################################
+
+# I used the 'texttable' module in the past to display DB query results better
+
 my_cursor.execute("SELECT * FROM users")
-for user in my_cursor:
-    print(user)
+result = my_cursor.fetchall()
+
+# Column headers
+print("NAME\t\tEMAIL\t\t\t\tAGE")
+print("----\t\t-----\t\t\t\t---")
+
+# Loop results
+for row in result:
+    if len(row[0]) <= 7:
+        print("{}\t\t{}\t\t{}".format(row[0], row[1], row[2]))
+    else:
+        print("{}\t{}\t\t{}".format(row[0], row[1], row[2]))
+
+
 
 
